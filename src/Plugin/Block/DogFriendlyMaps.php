@@ -20,8 +20,19 @@ class DogFriendlyMaps extends BlockBase implements BlockPluginInterface {
     * {@inheritdoc}
     */
     public function build() {
+        $config = $this->getConfiguration();
+
+        if(!empty($config['api'])) {
+            $api =  $config['api'];
+        }
+        else {
+            $api = $this->t('');
+        }
         return array(
-            '#markup' => $this->t('Hello, World!'),
+            '#markup' => $this->t('api: @api', array(
+                '@api'=>$api,
+                )
+            ),
         );
     }
     /**
@@ -44,5 +55,14 @@ class DogFriendlyMaps extends BlockBase implements BlockPluginInterface {
     */
     public function blockSubmit($form, FormStateInterface $form_state) {
         $this->configuration['api'] = $form_state->getValue('dogfriendly_maps_api');
+    }
+    /**
+    * {@inheritdoc}
+    */
+    public function defaultConfiguration() {
+        $default_config = \Drupal::config('dogfriendly_maps.settings');
+        return array(
+            'api' => $default_config->get('maps.api')
+        );
     }
 }
