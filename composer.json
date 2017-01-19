@@ -1,0 +1,6 @@
+{
+    "name": "drupal/dogfriendly_maps",
+    "description": "Enables an angularjs2 google map of locations.",
+    "type": "drupal-module",
+    "license": "GPL-2.0+"
+}
